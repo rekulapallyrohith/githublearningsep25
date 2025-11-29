@@ -1,0 +1,22 @@
+name: understanding output
+on:
+    push:
+        branches:
+            - main
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        outputs:
+            artifacts: my-apps
+        steps:
+            - id: step1
+              name: step1
+              run: echo "tip=hello" >> $GITHUB_OUTPUT
+            - name: step2
+              run: echo "output from step1 is ${{steps.step1.outputs.tip}}"
+    job2:
+        needs: job1
+        runs-on: ubuntu-latest
+        steps:
+          - run: echo "${{needs.job1.outputs.artifacts}}"
+
