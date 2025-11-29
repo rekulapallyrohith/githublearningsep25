@@ -8,4 +8,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - run: "echo Repo: ${{github.repository}} by ${{github.actor}}"
-            
+            - name: show the complete github context
+              run: echo '${{toJson(github)}}'
+            - name: show complete env contexts
+              run: echo '${{toJson(env)}}'
+            - name: show complete runner context
+              run: echo '${{toJson(runner)}}'
